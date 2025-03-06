@@ -9,8 +9,7 @@ var redis = builder.AddRedis("redis", 6379)
 
 var orleans = builder.AddOrleans("default")
         .WithClustering(redis)
-        .WithMemoryGrainStorage("stocks")
-        .WithGrainStorage("customers", redis)
+        .WithGrainStorage("stocks", redis)
     ;
 
 var silo = builder.AddProject<Projects.Silo>("silos")
