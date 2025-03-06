@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketData", "Workers\Marke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelogica", "Workers\Nelogica\Nelogica.csproj", "{0EDA7408-FC52-4B1B-A839-3ED07B876469}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{78CD6D7C-F2CB-4456-BA9C-0760379D8AF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silo", "Silo\Silo.csproj", "{84F54A39-CE3D-491D-9414-ACDEDB09EF83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +56,14 @@ Global
 		{0EDA7408-FC52-4B1B-A839-3ED07B876469}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EDA7408-FC52-4B1B-A839-3ED07B876469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EDA7408-FC52-4B1B-A839-3ED07B876469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78CD6D7C-F2CB-4456-BA9C-0760379D8AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78CD6D7C-F2CB-4456-BA9C-0760379D8AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78CD6D7C-F2CB-4456-BA9C-0760379D8AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78CD6D7C-F2CB-4456-BA9C-0760379D8AF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84F54A39-CE3D-491D-9414-ACDEDB09EF83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84F54A39-CE3D-491D-9414-ACDEDB09EF83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84F54A39-CE3D-491D-9414-ACDEDB09EF83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84F54A39-CE3D-491D-9414-ACDEDB09EF83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2E73FF15-C146-41F2-B1BA-AA0C7C5E3BFB} = {EBCE7DCA-EA99-4F7D-9732-9E3FA6E3F6D0}

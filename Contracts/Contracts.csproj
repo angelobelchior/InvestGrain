@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>latestmajor</LangVersion>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <EnableNETAnalyzers/>
+        <WarningsAsErrors>CA2000</WarningsAsErrors>
+
+        <RootNamespace>InvestGrain.Contracts</RootNamespace>
+        <AssemblyName>InvestGrain.Contracts</AssemblyName>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="9.1.2"/>
+        <PackageReference Include="Microsoft.Orleans.Sdk" Version="9.1.2"/>
+    </ItemGroup>
+
+</Project>
