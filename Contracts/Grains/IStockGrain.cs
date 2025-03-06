@@ -6,5 +6,8 @@ namespace InvestGrain.Contracts.Grains;
 public interface IStockGrain : IGrainWithStringKey
 {
     [Alias("UpdateAsync")]
-    ValueTask UpdateAsync(Stock stock);
+    Task UpdateAsync(Stock stock);
+
+    [Alias("GetAsync")]
+    Task<Stock?> GetAsync();
 }
