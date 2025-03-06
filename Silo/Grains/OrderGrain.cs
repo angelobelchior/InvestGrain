@@ -36,6 +36,7 @@ public class OrderGrain(
     public async Task OnOrderUpdatedAsync(OrderStatus status)
     {
         data.State.Status = status;
+        data.State.DateTime = DateTime.Now;
         await data.WriteStateAsync();
 
         repository.Update(data.State);

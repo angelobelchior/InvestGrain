@@ -13,12 +13,13 @@ public class Worker(IClusterClient client, IOrdersRepository repository) : Backg
             var randomDelay = Random.Shared.Next(5000, 10000);
             await Task.Delay(randomDelay, stoppingToken);
 
-            var orders = repository.ListByStatus(OrderStatus.Pending);
+            var orders = repository.ListAllNotCompleted();
 
             foreach (var order in orders)
             {
                 var historyGrain = client.GetGrain<IHistoryGrain>(order.Id);
-                await historyGrain.UpdateAsync(OrderStatus.Completed);
+                var randomStatus = Random.Shared.Next(0, 3);
+                await historyGrain.UpdateAsync((OrderStatus)randomStatus);
             }
         }
     }
