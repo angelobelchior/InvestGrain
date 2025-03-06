@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aspire", "Aspire", "{EBCE7DCA-EA99-4F7D-9732-9E3FA6E3F6D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDefaults", "Aspire\ServiceDefaults\ServiceDefaults.csproj", "{2E73FF15-C146-41F2-B1BA-AA0C7C5E3BFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppHost", "Aspire\AppHost\AppHost.csproj", "{1F97E81A-92F5-4302-A32C-50546BB38271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{B0B75AA2-81AC-45E7-AC9D-6EEFC62435C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{CD518C89-D47B-45FD-B258-8F1417BAC578}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workers", "Workers", "{6DB5C690-B9E7-4BDB-B1DA-15A3C4177B17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketData", "Workers\MarketData\MarketData.csproj", "{683492F5-A3BD-4FD4-8BCA-D95ADDC05E2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelogica", "Workers\Nelogica\Nelogica.csproj", "{0EDA7408-FC52-4B1B-A839-3ED07B876469}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E73FF15-C146-41F2-B1BA-AA0C7C5E3BFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E73FF15-C146-41F2-B1BA-AA0C7C5E3BFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E73FF15-C146-41F2-B1BA-AA0C7C5E3BFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E73FF15-C146-41F2-B1BA-AA0C7C5E3BFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F97E81A-92F5-4302-A32C-50546BB38271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F97E81A-92F5-4302-A32C-50546BB38271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F97E81A-92F5-4302-A32C-50546BB38271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F97E81A-92F5-4302-A32C-50546BB38271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0B75AA2-81AC-45E7-AC9D-6EEFC62435C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0B75AA2-81AC-45E7-AC9D-6EEFC62435C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0B75AA2-81AC-45E7-AC9D-6EEFC62435C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0B75AA2-81AC-45E7-AC9D-6EEFC62435C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD518C89-D47B-45FD-B258-8F1417BAC578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD518C89-D47B-45FD-B258-8F1417BAC578}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD518C89-D47B-45FD-B258-8F1417BAC578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD518C89-D47B-45FD-B258-8F1417BAC578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{683492F5-A3BD-4FD4-8BCA-D95ADDC05E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{683492F5-A3BD-4FD4-8BCA-D95ADDC05E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{683492F5-A3BD-4FD4-8BCA-D95ADDC05E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{683492F5-A3BD-4FD4-8BCA-D95ADDC05E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EDA7408-FC52-4B1B-A839-3ED07B876469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EDA7408-FC52-4B1B-A839-3ED07B876469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EDA7408-FC52-4B1B-A839-3ED07B876469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EDA7408-FC52-4B1B-A839-3ED07B876469}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2E73FF15-C146-41F2-B1BA-AA0C7C5E3BFB} = {EBCE7DCA-EA99-4F7D-9732-9E3FA6E3F6D0}
+		{1F97E81A-92F5-4302-A32C-50546BB38271} = {EBCE7DCA-EA99-4F7D-9732-9E3FA6E3F6D0}
+		{683492F5-A3BD-4FD4-8BCA-D95ADDC05E2C} = {6DB5C690-B9E7-4BDB-B1DA-15A3C4177B17}
+		{0EDA7408-FC52-4B1B-A839-3ED07B876469} = {6DB5C690-B9E7-4BDB-B1DA-15A3C4177B17}
+	EndGlobalSection
+EndGlobal

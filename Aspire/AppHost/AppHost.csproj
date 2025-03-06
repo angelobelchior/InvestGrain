@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0"/>
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsAspireHost>true</IsAspireHost>
+        <UserSecretsId>7a93d1da-2dd5-4f0a-aca5-69a2daec653c</UserSecretsId>
+        <RootNamespace>InvestGrain.AppHost</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\API\API.csproj" />
+        <ProjectReference Include="..\..\UI\UI.csproj" />
+        <ProjectReference Include="..\..\Workers\MarketData\MarketData.csproj" />
+        <ProjectReference Include="..\..\Workers\Nelogica\Nelogica.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0"/>
+    </ItemGroup>
+
+</Project>

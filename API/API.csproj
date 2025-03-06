@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>latestmajor</LangVersion>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <EnableNETAnalyzers/>
+        <WarningsAsErrors>CA2000</WarningsAsErrors>
+
+        <RootNamespace>InvestGrain.API</RootNamespace>
+        <AssemblyName>InvestGrain.API</AssemblyName>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Aspire\ServiceDefaults\ServiceDefaults.csproj" />
+    </ItemGroup>
+
+
+</Project>
