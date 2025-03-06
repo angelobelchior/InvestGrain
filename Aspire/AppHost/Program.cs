@@ -15,7 +15,6 @@ var orleans = builder.AddOrleans("default")
 
 var silo = builder.AddProject<Projects.Silo>("silos")
         .WaitFor(redis)
-        .WithReplicas(3)
         .WithReference(orleans)
     ;
 

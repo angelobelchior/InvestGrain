@@ -48,7 +48,7 @@ app.MapGet("orders", (
     return Results.Json(orders);
 });
 
-app.MapGet("orders/{stockName}/buy", async (
+app.MapPost("orders/{stockName}/buy", async (
         [FromHeader(Name = "consumerId")] ulong consumerId,
         IClusterClient clusterClient,
         string stockName)

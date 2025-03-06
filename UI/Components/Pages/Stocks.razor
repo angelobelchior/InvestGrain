@@ -1,0 +1,151 @@
+﻿@page "/stocks"
+@using System.Globalization
+@using InvestGrain.Contracts.Models
+@rendermode InteractiveServer
+
+@inject APIClient apiClient
+
+<PageTitle>Stocks</PageTitle>
+
+<h1>Stocks</h1>
+
+<FluentGrid Spacing="3" AdaptiveRendering="true" Justify="JustifyContent.FlexStart"
+            Style="background-color: var(--neutral-layer-3); padding: 4px; ">
+    <FluentGridItem xs="6" sm="3">
+        @if (stocks == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <FluentDataGrid Id="stocksId"
+                            Items="@stocks"
+                            ShowHover="true"
+
+                            TGridItem="string"
+                            OnRowClick="async row => await GetStockByNameAsync(row.Item ?? string.Empty)">
+
+                <SelectColumn TGridItem="string"
+                              SelectMode="DataGridSelectMode.Single"
+                              SelectFromEntireRow="true"/>
+
+                <PropertyColumn
+                    Title="Name"
+                    Property="@(c => c)"
+                    Align="Align.Start"/>
+            </FluentDataGrid>
+        }
+    </FluentGridItem>
+
+    <FluentGridItem xs="6" sm="3">
+        <div class="card">
+            @if (stockProperties == null)
+            {
+                <p><em>Select a Stock...</em></p>
+            }
+            else
+            {
+                <FluentDataGrid Id="stockId"
+                                Items="@stockProperties"
+                                ShowHover="true"
+                                TGridItem="Item">
+
+                    <SelectColumn TGridItem="Item"
+                                  SelectMode="DataGridSelectMode.Single"
+                                  SelectFromEntireRow="true"/>
+
+                    <PropertyColumn Title="Property" Property="@(c => c.Property)" Align="Align.Start"/>
+                    <PropertyColumn Title="Value" Property="@(c => c.Value)" Align="Align.Start"/>
+                </FluentDataGrid>
+
+                <FluentDivider Style="width: 100%;" Orientation="Orientation.Horizontal"/>
+
+                <div class="card">
+                    <FluentButton Loading="@loading" OnClick="@BuyAsync" Appearance="Appearance.Accent">Buy
+                    </FluentButton>
+                </div>
+            }
+        </div>
+    </FluentGridItem>
+
+    <FluentGridItem xs="6" sm="6">
+        @if (orders == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <FluentDataGrid Id="ordersId"
+                            Items="@orders"
+                            ShowHover="true"
+                            TGridItem="Order">
+
+                <SelectColumn TGridItem="Order"
+                              SelectMode="DataGridSelectMode.Single"
+                              SelectFromEntireRow="true"/>
+
+                <PropertyColumn Title="Stock" Property="@(c => c.Stock.Name)" Align="Align.Start"/>
+                <PropertyColumn Title="Value" Property="@(c => c.Stock.Value.ToString("C"))" Align="Align.Start"/>
+                <PropertyColumn Title="Status" Property="@(c => c.Status)" Align="Align.Start"/>
+                <PropertyColumn Title="DateTime" Property="@(c => c.DateTime.ToString("HH:mm:ss"))"
+                                Align="Align.Start"/>
+            </FluentDataGrid>
+
+            <FluentDivider Style="width: 100%;" Orientation="Orientation.Horizontal"/>
+
+            <div class="card">
+                <FluentButton Loading="@loading" OnClick="@GetHistoryAsync" Appearance="Appearance.Accent">Refresh
+                </FluentButton>
+            </div>
+        }
+    </FluentGridItem>
+</FluentGrid>
+
+
+@code
+{
+    bool loading = false;
+    private const ulong consumerId = 1;
+
+    private IQueryable<string>? stocks;
+    private IQueryable<Order>? orders;
+
+    private IQueryable<Item>? stockProperties;
+    private Stock? currentStock;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ListAllStocksAsync();
+        await GetHistoryAsync();
+    }
+
+    private async Task ListAllStocksAsync()
+        => stocks = (await apiClient.ListAllStocksAsync()).AsQueryable();
+
+    private async Task GetHistoryAsync()
+        => orders = (await apiClient.GetHistoryAsync(consumerId)).AsQueryable();
+
+    private async Task GetStockByNameAsync(string stockName)
+    {
+        currentStock = await apiClient.GetStockByNameAsync(stockName);
+        if (currentStock is null) return;
+
+        var properties = new List<Item>();
+        properties.Add(new("Name", currentStock.Name));
+        properties.Add(new("Value", currentStock.Value.ToString("C", CultureInfo.CurrentUICulture)));
+        properties.Add(new("DateTime", currentStock.DateTime.ToString("hh:mm:ss")));
+        stockProperties = properties.AsQueryable();
+    }
+
+    private async Task BuyAsync()
+    {
+        if (currentStock is null) return;
+
+        loading = true;
+        await apiClient.BuyAsync(consumerId, currentStock.Name);
+        await GetHistoryAsync();
+        loading = false;
+    }
+
+    record Item(string Property, object Value);
+}

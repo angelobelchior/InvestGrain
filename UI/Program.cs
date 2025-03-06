@@ -10,7 +10,10 @@ builder.AddServiceDefaults();
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddOutputCache();
-builder.Services.AddHttpClient<WeatherApiClient>(client => { client.BaseAddress = new("https+http://api"); });
+builder.Services.AddHttpClient<APIClient>(client =>
+{
+    client.BaseAddress = new("https+http://api");
+});
 
 var app = builder.Build();
 

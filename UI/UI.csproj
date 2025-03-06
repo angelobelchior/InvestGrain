@@ -20,6 +20,7 @@
         <ProjectReference Include="..\Aspire\ServiceDefaults\ServiceDefaults.csproj"/>
         <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.11.5"/>
         <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.11.5"/>
+        <ProjectReference Include="..\Contracts\Contracts.csproj" />
     </ItemGroup>
 
 </Project>
