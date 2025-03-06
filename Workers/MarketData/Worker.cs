@@ -25,7 +25,7 @@ public class Worker(IClusterClient client)
                     }, async (stock, token) =>
                     {
                         var grain = client.GetGrain<IStockGrain>(stock.Name);
-                        await grain.UpdateAsync(stock);
+                        await grain.UpdateValueAsync(stock);
                     });
                 }
 
@@ -41,7 +41,7 @@ public class Worker(IClusterClient client)
 
     private static IReadOnlyCollection<Stock> CreateStocks()
     {
-        var stockNames = Stock.GetStockNameList();
+        var stockNames = Stock.ListAll();
         var stocks = new List<Stock>();
 
         foreach (var stockName in stockNames)

@@ -4,21 +4,21 @@ using InvestGrain.Contracts.Models;
 namespace InvestGrain.Silo.Grains;
 
 public class StockGrain(
-    [PersistentState("stocksState", "stocks")]
-    IPersistentState<Stock> stockState)
+    [PersistentState("stockValue", "stocks")]
+    IPersistentState<Stock> data)
     : Grain, IStockGrain
 {
-    public async Task UpdateAsync(Stock stock)
+    public async Task UpdateValueAsync(Stock stock)
     {
-        stockState.State = stock;
-        await stockState.WriteStateAsync();
+        data.State = stock;
+        await data.WriteStateAsync();
     }
 
     public Task<Stock?> GetAsync()
     {
-        var stock = !stockState.RecordExists
+        var stock = !data.RecordExists
             ? null 
-            : stockState.State;
+            : data.State;
         
         return Task.FromResult(stock);
     }

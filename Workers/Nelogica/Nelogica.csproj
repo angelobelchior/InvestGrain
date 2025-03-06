@@ -18,6 +18,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="LiteDB" Version="5.0.21" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2"/>
         <PackageReference Include="Microsoft.Orleans.Client" Version="9.1.2"/>
         <PackageReference Include="Microsoft.Orleans.Clustering.Redis" Version="9.1.2"/>

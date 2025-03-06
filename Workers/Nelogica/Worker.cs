@@ -1,23 +1,25 @@
+using InvestGrain.Contracts.Grains;
+using InvestGrain.Contracts.Models;
+using InvestGrain.Worker.Nelogica.Repositories;
+
 namespace InvestGrain.Worker.Nelogica;
 
-public class Worker : BackgroundService
+public class Worker(IClusterClient client, IOrdersRepository repository) : BackgroundService
 {
-    private readonly ILogger<Worker> _logger;
-
-    public Worker(ILogger<Worker> logger)
-    {
-        _logger = logger;
-    }
-
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            if (_logger.IsEnabled(LogLevel.Information))
+            var randomDelay = Random.Shared.Next(5000, 10000);
+            await Task.Delay(randomDelay, stoppingToken);
+
+            var orders = repository.ListByStatus(OrderStatus.Pending);
+
+            foreach (var order in orders)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                var historyGrain = client.GetGrain<IHistoryGrain>(order.Id);
+                await historyGrain.UpdateAsync(OrderStatus.Completed);
             }
-            await Task.Delay(1000, stoppingToken);
         }
     }
 }

@@ -7,7 +7,7 @@ public class Stock
     [Id(1)] public decimal Value { get; set; }
     [Id(2)] public DateTime DateTime { get; set; }
 
-    public static string[] GetStockNameList() =>
+    public static string[] ListAll() =>
     [
         "PETR3",
         "PETR4",
