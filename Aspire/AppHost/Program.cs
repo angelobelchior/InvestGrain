@@ -7,7 +7,7 @@ var redis = builder.AddRedis("redis", 6379)
         })
     ;
 
-var orleans = builder.AddOrleans("default")
+var orleans = builder.AddOrleans("orleans")
         .WithClustering(redis)
         .WithGrainStorage("stocks", redis)
         .WithGrainStorage("orders", redis)
