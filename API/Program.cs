@@ -64,4 +64,16 @@ app.MapPost("orders/{stockName}/buy", async (
     return Results.Json(order);
 });
 
+app.MapPost("orders/{id}", async (
+        [FromHeader(Name = "consumerId")] ulong consumerId,
+        Guid id,
+        IClusterClient clusterClient)
+    =>
+{
+    var orderGrain = clusterClient.GetGrain<IOrderGrain>(id);
+    var order = await orderGrain.GetAsync();
+
+    return Results.Json(order);
+});
+
 app.Run();

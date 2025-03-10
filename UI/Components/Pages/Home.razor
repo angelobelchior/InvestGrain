@@ -10,7 +10,7 @@
 <h1>Stocks</h1>
 
 <FluentGrid Spacing="3" AdaptiveRendering="true" Justify="JustifyContent.FlexStart"
-            Style="background-color: var(--neutral-layer-3); padding: 4px; ">
+            Style="padding: 4px; ">
     <FluentGridItem xs="6" sm="3">
         @if (stocks == null)
         {
@@ -157,7 +157,7 @@
         if (currentStock is null) return;
 
         loading = true;
-        await apiClient.BuyAsync(consumerId, currentStock.Name);
+        _ = await apiClient.BuyAsync(consumerId, currentStock.Name);
         await GetHistoryAsync();
         currentStock = null;
         stockProperties = null;

@@ -26,6 +26,13 @@ public class APIClient(HttpClient client)
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<Order>();
     }
+    
+    public async Task<Order?> GetOrderByIdAsync(Guid orderId)
+    {
+        var response = await client.GetAsync($"orders/{orderId}");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<Order>();
+    }
 
     public async Task<IReadOnlyCollection<Order>> GetHistoryAsync(ulong consumerId)
     {
