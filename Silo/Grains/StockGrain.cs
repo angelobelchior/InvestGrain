@@ -10,6 +10,12 @@ public class StockGrain(
 {
     public async Task UpdateValueAsync(Stock stock)
     {
+        if (data.RecordExists)
+        {
+            var change = stock.Value - data.State.Value;
+            stock.Change = change;
+        }
+
         data.State = stock;
         await data.WriteStateAsync();
     }
@@ -17,9 +23,9 @@ public class StockGrain(
     public Task<Stock?> GetAsync()
     {
         var stock = !data.RecordExists
-            ? null 
+            ? null
             : data.State;
-        
+
         return Task.FromResult(stock);
     }
 

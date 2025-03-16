@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+             xmlns:models="clr-namespace:InvestGrain.App.Models"
+             xmlns:viewModels="clr-namespace:InvestGrain.App.ViewModels"
+             xmlns:contracts="clr-namespace:InvestGrain.Contracts.Models;assembly=InvestGrain.Contracts"
+             x:Class="InvestGrain.App.Views.StocksPage"
+             x:DataType="viewModels:MainViewModel"
+             Title="Empresas Brasileiras"
+             >
+    
+    <RefreshView IsRefreshing="{Binding RefreshCommand.IsRunning}"
+                 Command="{Binding RefreshCommand}">
+
+        <CollectionView x:Name="StocksCollectionView"
+                        ItemsSource="{Binding Stocks}"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:DataType="contracts:Stock"
+                          Padding="10"
+                          ColumnSpacing="10"
+                          ColumnDefinitions="60, *, Auto">
+
+                        <Border HeightRequest="60"
+                                WidthRequest="60"
+                                StrokeShape="RoundRectangle 30,30,30,30"
+                                StrokeThickness="1"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Margin="0,0,0,0">
+
+                            <ffimageloading:SvgCachedImage
+                                Source="{Binding Icon}"
+                                HeightRequest="60"
+                                WidthRequest="60" />
+                        </Border>
+
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="2"
+                                             VerticalOptions="Center">
+                            <Label Text="{Binding Name}" Style="{StaticResource StockLabelStyle}"
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding Symbol}" Style="{StaticResource StockLabelStyle}" FontSize="12"
+                                   TextColor="Gray" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="2"
+                                             Spacing="2"
+                                             VerticalOptions="Center"
+                                             HorizontalOptions="End">
+                            <Label Text="{Binding Value, StringFormat='R$ {0:F2}'}"
+                                   Style="{StaticResource StockLabelStyle}"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="End" />
+                            <Label Text="{Binding Change, StringFormat='{0:F2}%'}"
+                                   TextColor="{Binding Change, Converter={StaticResource ChangeColorConverter}}"
+                                   HorizontalTextAlignment="End"
+                                   FontSize="12" />
+                        </VerticalStackLayout>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+
+</ContentPage>

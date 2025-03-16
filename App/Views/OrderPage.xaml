@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InvestGrain.App.Views.OrderPage"
+             xmlns:local="clr-namespace:InvestGrain.App.ViewModels"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+             Padding="20"
+             x:DataType="local:OrderViewModel"
+             Title="{Binding Stock.Name}">
+
+    <VerticalStackLayout Spacing="10">
+
+        <Grid x:Name="stockGrid"
+            ColumnSpacing="10"
+            Margin="0,0,0,50"
+            ColumnDefinitions="60, *, Auto">
+
+            <Border HeightRequest="60"
+                    WidthRequest="60"
+                    StrokeShape="RoundRectangle 30,30,30,30"
+                    StrokeThickness="1"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    Margin="0,0,0,0">
+
+                <ffimageloading:SvgCachedImage
+                    Source="{Binding Stock.Icon}"
+                    HeightRequest="60"
+                    WidthRequest="60" />
+            </Border>
+
+
+            <VerticalStackLayout Grid.Column="1"
+                                 Spacing="2"
+                                 VerticalOptions="Center">
+                <Label Text="{Binding Stock.Name}" Style="{StaticResource StockLabelStyle}"
+                       FontAttributes="Bold" />
+                <Label Text="{Binding Stock.Symbol}" Style="{StaticResource StockLabelStyle}" FontSize="12"
+                       TextColor="Gray" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="2"
+                                 Spacing="2"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="End">
+                <Label Text="{Binding Stock.Value, StringFormat='R$ {0:F2}'}"
+                       Style="{StaticResource StockLabelStyle}"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="End" />
+                <Label Text="{Binding Stock.Change, StringFormat='{0:F2}%'}"
+                       TextColor="{Binding Stock.Change, Converter={StaticResource ChangeColorConverter}}"
+                       HorizontalTextAlignment="End"
+                       FontSize="12" />
+            </VerticalStackLayout>
+
+        </Grid>
+
+        <VerticalStackLayout Margin="0,0,0,20" Spacing="5">
+            <Label Text="Quanto você quer investir?"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+
+            <Label Text="{Binding AvailableBalance, StringFormat='Saldo disponível: R$ {0:F2}'}"
+                   FontSize="16"
+                   TextColor="Gray" />
+        </VerticalStackLayout>
+
+        <Label Text="Tipo de Ordem:"
+               FontSize="16"
+               FontAttributes="Bold" />
+
+        <Picker Title="Selecione o tipo de ordem"
+                ItemsSource="{Binding OrderTypes}"
+                SelectedItem="{Binding OrderTypeItem}"
+                HorizontalOptions="Fill" />
+
+        <Label Text="Quantidade de ações a investir:"
+               FontSize="16"
+               FontAttributes="Bold" />
+
+        <Entry Text="{Binding StockQuantity, Mode=TwoWay}"
+               Keyboard="Numeric"
+               Placeholder="Digite a quantidade"
+               HorizontalOptions="Fill" />
+
+        <Label Text="Valor desejado por ação:"
+               FontSize="16"
+               FontAttributes="Bold"
+               IsVisible="{Binding OrderTypeItem, Converter={StaticResource DesiredPriceVisibleConverter}}" />
+
+        <Entry Text="{Binding DesiredPrice, Mode=TwoWay}"
+               Keyboard="Numeric"
+               Placeholder="Digite o valor desejado"
+               IsVisible="{Binding OrderTypeItem, Converter={StaticResource DesiredPriceVisibleConverter}}"
+               HorizontalOptions="Fill" />
+
+        <Button Text="Comprar" Command="{Binding BuyCommand}" />
+
+    </VerticalStackLayout>
+</ContentPage>

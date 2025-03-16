@@ -1,10 +1,7 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
 var redis = builder.AddRedis("redis", 6379)
-        .WithRedisInsight(config =>
-        {
-            config.WithHostPort(6378);
-        })
+        .WithRedisInsight(config => { config.WithHostPort(6378); })
     ;
 
 var orleans = builder.AddOrleans("orleans")
@@ -23,17 +20,6 @@ var api = builder.AddProject<Projects.API>("api")
         .WaitFor(redis)
         .WithReference(orleans.AsClient())
         .WithExternalHttpEndpoints()
-    ;
-
-builder.AddProject<Projects.UI>("ui")
-    .WithExternalHttpEndpoints()
-    .WithReference(api)
-    .WaitFor(api);
-
-_ = builder.AddProject<Projects.MarketData>("market-data")
-        .WaitFor(silo)
-        .WaitFor(api)
-        .WithReference(orleans.AsClient())
     ;
 
 _ = builder.AddProject<Projects.Nelogica>("nelogica")

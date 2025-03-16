@@ -20,19 +20,28 @@ var app = builder.Build();
 app.UseOpenAPI();
 app.UseCors(corsPolicyName);
 
-app.MapGet("stocks", ()
+app.MapGet("stocks", async (IClusterClient clusterClient)
     =>
 {
-    var allStocks = Stock.ListAll();
+    var stockNames = Stock.ListAll();
+    var allStocks = new List<Stock>();
+    foreach (var (symbol, _) in stockNames)
+    {
+        var stockGrain = clusterClient.GetGrain<IStockGrain>(symbol);
+        var stock = await stockGrain.GetAsync();
+        if (stock is null) continue;
+        allStocks.Add(stock);
+    }
+
     return Results.Json(allStocks);
 });
 
-app.MapGet("stocks/{stockName}", async (
+app.MapGet("stocks/{symbol}", async (
         IClusterClient clusterClient,
-        string stockName)
+        string symbol)
     =>
 {
-    var stockGrain = clusterClient.GetGrain<IStockGrain>(stockName);
+    var stockGrain = clusterClient.GetGrain<IStockGrain>(symbol);
     var stock = await stockGrain.GetAsync();
     return stock is null
         ? Results.NotFound($"{stock} not found")
@@ -48,13 +57,13 @@ app.MapGet("orders", (
     return Results.Json(orders);
 });
 
-app.MapPost("orders/{stockName}/buy", async (
+app.MapPost("orders/{symbol}/buy", async (
         [FromHeader(Name = "consumerId")] ulong consumerId,
         IClusterClient clusterClient,
-        string stockName)
+        string symbol)
     =>
 {
-    var stockGrain = clusterClient.GetGrain<IStockGrain>(stockName);
+    var stockGrain = clusterClient.GetGrain<IStockGrain>(symbol);
     var stock = await stockGrain.GetAsync();
     if (stock is null) return Results.NotFound($"{stock} not found");
 

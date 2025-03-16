@@ -15,8 +15,6 @@
     <ItemGroup>
         <ProjectReference Include="..\..\API\API.csproj" />
         <ProjectReference Include="..\..\Silo\Silo.csproj" />
-        <ProjectReference Include="..\..\UI\UI.csproj" />
-        <ProjectReference Include="..\..\Workers\MarketData\MarketData.csproj" />
         <ProjectReference Include="..\..\Workers\Nelogica\Nelogica.csproj" />
     </ItemGroup>
 
